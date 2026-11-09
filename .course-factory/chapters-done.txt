@@ -1,1 +1,2 @@
 course/01-getting-started.md
+course/02-antigravity-cli.md

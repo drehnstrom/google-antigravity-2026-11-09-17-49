@@ -1,2 +1,3 @@
 course/01-getting-started.md
 course/02-antigravity-cli.md
+course/03-antigravity-app.md

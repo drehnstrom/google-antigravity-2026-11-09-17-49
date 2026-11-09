@@ -187,7 +187,7 @@ agy -p "Generate CRUD controller handlers in src/controllers/invoice.controller.
 
 ### Reusable Templates and Rules
 - Stored in `.antigravity/templates/` and codified in `AGENTS.md`
-- Encapsulates architectural rules, required imports, and naming conventions
+- Encapsulate architectural rules, required imports, and naming conventions
 - Invoked consistently across team members to maintain uniform coding standards
 
 <!-- below-columns -->
@@ -231,7 +231,7 @@ agy -p "Apply template service-module with domain=shipping to src/services/shipp
 
 ### Scope Target Context
 - Pass explicit file paths or use `@file` references instead of broad directory wildcards
-- Keeps token consumption low and prevents unintended edits to unrelated modules
+- Keep token consumption low and prevent unintended edits to unrelated modules
 
 ### Inspect Diffs First
 - Run `--mode plan` or interactive mode when modifying core shared libraries
@@ -258,7 +258,7 @@ agy -p "Apply template service-module with domain=shipping to src/services/shipp
 
 ### Unit Test Generation
 - Inspect untested branches and edge cases in existing modules using `agy`.
-- Automatically aligns assertions and mocks with Jest, Vitest, or Pytest conventions in your repo.
+- Automatically align assertions and mocks with Jest, Vitest, or Pytest conventions in your repo.
 
 ### Multi-File Refactoring
 - Migrate deprecated APIs, rename domain concepts, or convert callbacks to `async/await` across modules.
@@ -397,7 +397,7 @@ npm run typecheck
 ---
 
 <!-- layout: 2-column -->
-# Demo Step 2 and 3: Automated Testing and Staged Review
+# Demo Steps 2 and 3: Automated Testing and Staged Review
 
 ### Terminal Commands
 ```bash

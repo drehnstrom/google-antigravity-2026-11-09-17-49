@@ -294,7 +294,7 @@ safety:
 
 ---
 
-# Demo Step 1 and 2: Installation and Authentication
+# Demo Steps 1 and 2: Installation and Authentication
 
 - First, we verify the CLI installation and confirm authentication access to Gemini models
 

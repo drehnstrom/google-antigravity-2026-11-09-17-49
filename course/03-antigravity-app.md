@@ -136,7 +136,7 @@ Google Antigravity
 ### Sandbox Verification Runs
 - Enable **Auto-Verify in Sandbox** to run `npm test` or `npx tsc --noEmit` in an isolated temporary worktree
 - Badges on each branch show immediately whether unit tests and typechecks pass
-- Prevents broken intermediate prototypes from overwriting your active local files
+- Prevent broken intermediate prototypes from overwriting your active local files
 
 <!-- below-columns -->
 
@@ -170,7 +170,7 @@ You run a multi-file refactor in the Antigravity App across `src/orders/service.
 
 ### Exporting to Templates
 - Once an interactive prompt produces the exact code structure you want, click **Export as Template**
-- Saves a parameterized YAML file directly into `.antigravity/templates/` for team reuse
+- Save a parameterized YAML file directly into `.antigravity/templates/` for team reuse
 
 ---
 
@@ -275,7 +275,7 @@ antigravity .
 ---
 
 <!-- layout: 2-column -->
-# Demo Step 2 and 3: Branching, Hunk Review, and Template Export
+# Demo Steps 2 and 3: Branching, Hunk Review, and Template Export
 
 ### App Actions and CLI Verification
 1. In the Prompt Canvas, click **Fork Branch** and select `gemini-2.5-pro` with **Sandbox Verify** enabled (`npx vitest run`)

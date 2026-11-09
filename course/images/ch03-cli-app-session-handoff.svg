@@ -21,9 +21,9 @@
   <circle cx="34" cy="36" r="4" fill="#1e71d6"/>
   <circle cx="46" cy="36" r="4" fill="#6a55e4"/>
   <circle cx="58" cy="36" r="4" fill="#bd35c2"/>
-  <text x="32" y="62" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">$ ag edit src/auth.ts</text>
-  <text x="32" y="80" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" opacity="0.9">--save-session s_409</text>
-  <text x="32" y="100" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="10">$ ag app open --session s_409</text>
+  <text x="32" y="62" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">$ agy -p "Refactor auth"</text>
+  <text x="32" y="80" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" opacity="0.9">--mode plan</text>
+  <text x="32" y="100" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="10">$ antigravity .</text>
 
   <!-- Downward arrow to local state -->
   <path d="M 111 116 L 111 144" fill="none" stroke="#1e71d6" stroke-width="2" marker-end="url(#arrow-b)"/>
@@ -86,5 +86,5 @@
 
   <!-- Clean return loop underneath the center workspace back to .antigravity/templates -->
   <path d="M 698 244 L 698 266 L 111 266 L 111 248" fill="none" stroke="#bd35c2" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-m)"/>
-  <text x="410" y="278" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10">ag generate --template auth-guard</text>
+  <text x="410" y="278" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10">agy -p "Apply auth-guard template"</text>
 </svg>

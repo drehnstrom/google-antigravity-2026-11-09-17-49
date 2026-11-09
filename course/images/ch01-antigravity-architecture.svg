@@ -19,8 +19,8 @@
   <circle cx="48" cy="36" r="4" fill="#6a55e4"/>
   <circle cx="60" cy="36" r="4" fill="#bd35c2"/>
   <text x="112" y="39" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">Antigravity CLI</text>
-  <text x="34" y="64" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">$ ag edit src/api.ts</text>
-  <text x="34" y="82" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="11">--verify "npm test"</text>
+  <text x="34" y="64" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">$ agy -p "Refactor API"</text>
+  <text x="34" y="82" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="11">--mode accept-edits</text>
   <rect x="34" y="94" width="124" height="18" rx="3" fill="#1e71d6" opacity="0.22"/>
   <text x="42" y="107" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10">+14 -3 lines patched</text>
 

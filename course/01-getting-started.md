@@ -55,7 +55,7 @@ Google Antigravity
 <!-- layout: stacked -->
 # Google Antigravity Runtime Architecture
 
-- **Dual entry surfaces**: run fast terminal commands with the Antigravity CLI or inspect workflows visually in the Antigravity App
+- **Dual entry surfaces**: run fast terminal commands with the Antigravity CLI (`agy`) or inspect workflows visually in the Antigravity App
 - **Shared local engine**: a single runtime reads `antigravity.yaml`, indexes the abstract syntax tree (AST), and manages `.antigravity/` session state
 - **Bidirectional Gemini loop**: sends pruned project context to Gemini models and applies structured file patches back to your working tree
 
@@ -66,7 +66,7 @@ Google Antigravity
 <!-- layout: card-layout -->
 # One Framework, Two Complementary Interfaces
 
-### Antigravity CLI
+### Antigravity CLI (`agy`)
 - Built for terminal-first execution, shell pipelines, and automated scripts.
 - Generates boilerplate, scaffolds tests, and applies targeted refactors with minimal keystrokes.
 
@@ -110,12 +110,12 @@ Google Antigravity
 
 ### Host Runtime
 - 64-bit macOS, Linux, or Windows (WSL2 recommended on Windows)
-- Node.js 20 LTS or newer, or Python 3.11+ for SDK extensions
+- Standalone precompiled binary (no Node.js or Python runtime required for the CLI binary)
 - Minimum 4 GB available RAM for local AST indexing and App rendering
 
 ### Developer Tooling
 - Git 2.35+ initialized in the target workspace
-- Modern code editor such as Visual Studio Code
+- Modern code editor such as Visual Studio Code or Antigravity IDE
 - Terminal emulator with UTF-8 output support
 
 ### API and Network
@@ -126,42 +126,42 @@ Google Antigravity
 
 # Installing the Antigravity CLI and App
 
-- Install the CLI globally via your package manager and launch or install the companion desktop App
-- Run `ag doctor` immediately after installation to verify binary paths, Git integration, and OS keychain access
+- Install the Antigravity CLI (`agy`) as a standalone binary or via Homebrew on macOS
+- Install the companion graphical Antigravity App desktop application from the official site
 
 ```bash
-# Install the Antigravity CLI globally
-npm install -g @google/antigravity-cli
+# Option 1: Official install script for macOS and Linux
+curl -fsSL https://antigravity.google/cli/install.sh | bash
 
-# Verify CLI version and binary path
-ag --version
+# Option 2: Homebrew cask on macOS
+brew install --cask antigravity-cli
 
-# Install or link the graphical Antigravity App companion
-ag app install
+# Install the graphical Antigravity App companion
+brew install --cask antigravity
 
-# Run preflight diagnostics on local environment
-ag doctor
+# Verify CLI installation and active binary version
+agy --version
 ```
 
 ---
 
 <!-- layout: 2-column -->
-# Global vs. Project-Pinned Installations
+# Workstation Installation vs. Project Standards
 
-### Global Installation
-- Installed once per developer workstation (`npm install -g`)
-- Immediately available in any directory for quick prototyping
-- Risk: team members may run different CLI versions with mismatched template schemas
+### Workstation CLI Binary
+- Installed directly on developer machines via curl script or Homebrew cask
+- Immediately available in any directory by invoking `agy`
+- Risk: team members may run different CLI patch versions if not synchronized
 
-### Project-Pinned Installation
-- Declared in `package.json` (`devDependencies`) or `.tool-versions`
-- Guarantees every developer and CI runner uses the exact same Antigravity release
-- Recommended whenever `antigravity.yaml` workflows are committed to Git
+### Project Standards and Rules
+- Codified in project root via `AGENTS.md` and `.antigravity/` configuration
+- Guarantees every developer and automated agent follows identical repo rules
+- Version pinned via `.tool-versions` or container images for CI runners
 
 <!-- below-columns -->
 
 > [!IMPORTANT]
-> When running in a team repository, invoke Antigravity via `npx ag` or enable `engineStrict` in `antigravity.yaml` so version drift fails fast.
+> When adopting Antigravity across a team, commit project guidelines in `AGENTS.md` and define model defaults in `antigravity.yaml` so all team members stay aligned.
 
 ---
 
@@ -180,32 +180,32 @@ ag doctor
 
 ### Gemini API Key
 - Fastest setup for individual developers and local prototyping via Google AI Studio.
-- Stored in OS credential storage or supplied through the `GEMINI_API_KEY` environment variable.
+- Stored in `GEMINI_API_KEY` with `"modelProvider": "gemini"` in CLI settings.
 
 ### Google Cloud ADC
 - Uses Application Default Credentials (`gcloud auth application-default login`) with Vertex AI.
 - Ideal for enterprise teams requiring IAM role governance, audit logs, and regional data residency.
 
 ### Interactive Browser OAuth
-- Initiated directly via `ag auth login` or the Antigravity App sign-in screen.
-- Automatically refreshes short-lived access tokens and binds them to your local developer profile.
+- Initiated automatically when launching `agy` or the Antigravity App for the first time.
+- Authenticates with your Google account, storing credentials in your system keyring.
 
 ---
 
 # Authenticating Your Local Environment
 
-- Use `ag auth login` to store credentials securely in your operating system keychain, or export `GEMINI_API_KEY` for headless sessions
-- Verify active identity, auth provider, and model quota access with `ag auth status`
+- On first run, `agy` initiates browser OAuth, or export `GEMINI_API_KEY` for headless automation
+- Verify active account connectivity and model access with `agy models`
 
 ```bash
-# Option 1: Interactive authentication saved to OS keychain
-ag auth login
+# Option 1: Interactive authentication (prompts browser OAuth on first run)
+agy
 
-# Option 2: Environment variable for shell or CI sessions
+# Option 2: API key authentication for headless or CI sessions
 export GEMINI_API_KEY="AIzaSyYourApiKeyHere"
 
-# Verify active credential source and test token validity
-ag auth status
+# Verify active connection and available Gemini models
+agy models
 ```
 
 > [!WARNING]
@@ -225,7 +225,7 @@ ag auth status
 
 # Configuring Project Defaults in antigravity.yaml
 
-- Running `ag init` creates an `antigravity.yaml` manifest at the root of your repository
+- A project manifest such as `antigravity.yaml` at the root of your repository configures default models and limits
 - This file controls model selection, context inclusion rules, and safety boundaries for both the CLI and the App
 
 ```yaml
@@ -250,10 +250,10 @@ safety:
 # Configuration Precedence and Troubleshooting
 
 ### Precedence Order (Highest First)
-1. **Explicit CLI flags** (`--model`, `--temperature`)
+1. **Explicit CLI flags** (`--model`, `--mode`)
 2. **Environment variables** (`ANTIGRAVITY_MODEL`, `GEMINI_API_KEY`)
-3. **Workspace manifest** (`./antigravity.yaml`)
-4. **User global config** (`~/.config/antigravity/config.yaml`)
+3. **Workspace manifest and rules** (`./antigravity.yaml`, `AGENTS.md`)
+4. **User global config** (`~/.gemini/antigravity-cli/settings.json`)
 
 ### Common Setup Pitfalls
 - **403 Permission Denied**: API key lacks Generative Language API access or Vertex AI region is mismatched
@@ -263,7 +263,7 @@ safety:
 <!-- below-columns -->
 
 > [!TIP]
-> Run `ag config --effective` at any time to print the merged configuration and see which layer (flag, env var, workspace, or global) supplied each active setting.
+> Launch `agy` and use the `/config` slash command or inspect `settings.json` at any time to review active configuration layers and provider settings.
 
 ---
 
@@ -280,64 +280,64 @@ safety:
 <!-- layout: card-layout -->
 # Demo: Installing and Configuring Antigravity
 
-### Step 1: Verify and Diagnose
-- Check the installed CLI version and run `ag doctor` to confirm Node.js, Git, and OS keychain readiness.
-- Inspect any warnings reported by the diagnostic check before authenticating.
+### Step 1: Install and Verify CLI
+- Install the `agy` binary via the official script and verify version with `agy --version`.
+- Inspect environment path readiness and binary accessibility in your terminal.
 
 ### Step 2: Authenticate with Gemini
-- Configure authentication using `ag auth login` or `GEMINI_API_KEY` and verify identity with `ag auth status`.
-- Confirm both `gemini-2.5-flash` and `gemini-2.5-pro` endpoints are reachable.
+- Authenticate via Google OAuth on first launch or set `GEMINI_API_KEY`.
+- Run `agy models` to confirm both `gemini-2.5-flash` and `gemini-2.5-pro` endpoints are reachable.
 
 ### Step 3: Initialize and Validate Workspace
-- Run `ag init` in a sample repository to generate `antigravity.yaml` and `.gitignore` entries.
-- Inspect effective configuration layers, execute a live connectivity check, and launch the Antigravity App.
+- Set up `antigravity.yaml` and `AGENTS.md` in a sample repository.
+- Execute a test prompt from the terminal and launch the graphical Antigravity App.
 
 ---
 
-# Demo Step 1 and 2: Diagnostics and Authentication
+# Demo Step 1 and 2: Installation and Authentication
 
-- First, we verify the installation health and inspect the diagnostic output before authenticating
+- First, we verify the CLI installation and confirm authentication access to Gemini models
 
 ```bash
-# 1. Check installed version and environment health
-ag --version
-ag doctor
+# 1. Install Antigravity CLI and verify binary version
+curl -fsSL https://antigravity.google/cli/install.sh | bash
+agy --version
 
-# Expected output from ag doctor:
-# [OK] Node.js v20.14.0 (>= 20.0.0)
-# [OK] Git v2.43.0 repository detected (.git)
-# [OK] OS Keychain unlocked and writable
+# Expected output from agy --version:
+# agy version 1.2.0 (linux/amd64)
 
-# 2. Authenticate and verify active credential source
-ag auth login --provider ai-studio
-ag auth status
+# 2. Authenticate and list available Gemini models
+export GEMINI_API_KEY="AIzaSy..."
+agy models
+
+# Output lists available models:
+# - gemini-2.5-flash (default)
+# - gemini-2.5-pro
 ```
 
 ---
 
 <!-- layout: 2-column -->
-# Demo Step 3: Workspace Initialization and Ping
+# Demo Step 3: Workspace Initialization and Validation
 
 ### Terminal Commands
 ```bash
-# 3. Initialize workspace config
-ag init --default-model gemini-2.5-flash
+# 3. Verify workspace configuration
+cat antigravity.yaml
 
-# 4. Inspect effective config sources
-ag config --effective
+# 4. Send a fast validation prompt via headless mode
+agy -p "Respond with 'Antigravity ready' and model name" \
+  --model gemini-2.5-flash
 
-# 5. Send a live validation prompt
-ag ping --model gemini-2.5-flash
-
-# 6. Open workspace in the App
-ag app open .
+# 5. Open workspace in the graphical Antigravity App
+antigravity .
 ```
 
 ### Expected Validation Results
-- `ag init` writes `antigravity.yaml` and appends `.antigravity/cache` and `.antigravity/credentials.json` to `.gitignore`
-- `ag config --effective` shows `models.default: gemini-2.5-flash (source: ./antigravity.yaml)`
-- `ag ping` returns round-trip latency and token usage from `gemini-2.5-flash`
-- `ag app open .` launches the graphical interface preloaded with the same workspace settings
+- `antigravity.yaml` defines `models.default: gemini-2.5-flash` and exclusion globs
+- `agy -p` sends a non-interactive request and prints model confirmation to stdout
+- Execution displays round-trip latency and token footprint
+- `antigravity .` launches the graphical interface preloaded with the current workspace
 
 ---
 
@@ -376,7 +376,7 @@ ag app open .
 
 # Quiz 2 of 3
 
-**A developer updates `default: gemini-2.5-pro` inside the project’s `antigravity.yaml`, but running `ag generate` in their terminal still uses `gemini-2.5-flash`. No CLI flags were passed. What is the most likely cause?**
+**A developer updates `default: gemini-2.5-pro` inside the project’s `antigravity.yaml`, but running `agy` in their terminal still uses `gemini-2.5-flash`. No CLI flags were passed. What is the most likely cause?**
 
 - A. `antigravity.yaml` is only read by the graphical Antigravity App, not the CLI
 - B. `gemini-2.5-pro` cannot be set as a default model in configuration files
@@ -387,13 +387,13 @@ ag app open .
 
 # Quiz 2: Answer
 
-**A developer updates `default: gemini-2.5-pro` inside the project’s `antigravity.yaml`, but running `ag generate` in their terminal still uses `gemini-2.5-flash`. No CLI flags were passed. What is the most likely cause?**
+**A developer updates `default: gemini-2.5-pro` inside the project’s `antigravity.yaml`, but running `agy` in their terminal still uses `gemini-2.5-flash`. No CLI flags were passed. What is the most likely cause?**
 
 **Correct: C.** An environment variable such as `ANTIGRAVITY_MODEL=gemini-2.5-flash` is exported in their shell and takes higher precedence
 
 - Antigravity resolves configuration in order: CLI flags, then environment variables, then `antigravity.yaml`, and finally global user config
 - An exported `ANTIGRAVITY_MODEL` variable in the shell profile overrides the workspace `antigravity.yaml` setting
-- Running `ag doctor` or `ag config --effective` reveals which layer supplied each active setting
+- Running `/config` in `agy` reveals which layer supplied each active setting
 
 ---
 

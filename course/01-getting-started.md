@@ -215,11 +215,11 @@ ag auth status
 
 # Do Now: Spot the Context Bloater
 
-Before we look at `antigravity.yaml`, inspect a typical repository directory listing in your head or on your machine:
-
-- `.git/`, `node_modules/`, `dist/`, `.env.local`, `src/`, `tests/`
-- Write down which paths **must never** be sent to Gemini for security or token reasons
+- Before we look at `antigravity.yaml`, inspect these six repository paths: `.git/`, `node_modules/`, `dist/`, `.env.local`, `src/`, and `tests/`
+- Write down which paths **must never** be sent to Gemini for security or token budget reasons
 - Write down which paths Gemini **needs** to generate accurate code and unit tests
+
+![Repository directory tree showing proportional token footprint of six candidate paths against a 32k token budget line](images/ch01-context-bloater-tree.svg)
 
 ---
 

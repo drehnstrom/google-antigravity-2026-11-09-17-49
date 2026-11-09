@@ -1,78 +1,118 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" role="img" aria-label="CLI commands and App workspace events flow through the shared Antigravity engine and antigravity.yaml into Gemini models and return structured diffs to local files">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" role="img" aria-label="CLI commands and App workspace events flow through the shared Antigravity engine and antigravity.yaml into Gemini models and return structured diffs to local files">
   <defs>
-    <linearGradient id="ag-flow" x1="0" y1="0" x2="1" y2="0">
+    <linearGradient id="ag-band" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#1e71d6"/>
       <stop offset="0.5" stop-color="#6a55e4"/>
       <stop offset="1" stop-color="#bd35c2"/>
     </linearGradient>
-    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e71d6"/>
     </marker>
-    <marker id="arrow-magenta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="arr-magenta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#bd35c2"/>
     </marker>
   </defs>
 
-  <!-- Left: Dual Entry Surfaces (Terminal CLI and Graphical App) -->
-  <!-- Terminal surface -->
-  <rect x="24" y="24" width="180" height="106" rx="8" fill="#082445"/>
-  <circle cx="40" cy="40" r="4" fill="#1e71d6"/>
-  <circle cx="52" cy="40" r="4" fill="#6a55e4"/>
-  <circle cx="64" cy="40" r="4" fill="#bd35c2"/>
-  <text x="38" y="68" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">$ ag init --model</text>
-  <text x="38" y="88" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="12" opacity="0.85">gemini-2.5-pro</text>
-  <text x="38" y="112" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="11">Antigravity CLI</text>
+  <!-- Left Top: Terminal CLI window -->
+  <rect x="20" y="20" width="184" height="108" rx="8" fill="#082445"/>
+  <circle cx="36" cy="36" r="4" fill="#1e71d6"/>
+  <circle cx="48" cy="36" r="4" fill="#6a55e4"/>
+  <circle cx="60" cy="36" r="4" fill="#bd35c2"/>
+  <text x="112" y="39" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">Antigravity CLI</text>
+  <text x="34" y="64" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">$ ag edit src/api.ts</text>
+  <text x="34" y="82" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="11">--verify "npm test"</text>
+  <rect x="34" y="94" width="124" height="18" rx="3" fill="#1e71d6" opacity="0.22"/>
+  <text x="42" y="107" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10">+14 -3 lines patched</text>
 
-  <!-- Graphical App surface -->
-  <rect x="24" y="160" width="180" height="114" rx="8" fill="none" stroke="#082445" stroke-width="2"/>
-  <rect x="24" y="160" width="180" height="24" rx="6" fill="#082445"/>
-  <text x="36" y="176" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">Antigravity App</text>
-  <!-- Split panes inside App -->
-  <rect x="36" y="194" width="70" height="66" rx="4" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
-  <line x1="42" y1="208" x2="96" y2="208" stroke="#1e71d6" stroke-width="2"/>
-  <line x1="42" y1="220" x2="84" y2="220" stroke="#495f7a" stroke-width="2"/>
-  <line x1="42" y1="232" x2="90" y2="232" stroke="#495f7a" stroke-width="2"/>
-  <rect x="116" y="194" width="76" height="66" rx="4" fill="none" stroke="#6a55e4" stroke-width="1.5"/>
-  <rect x="124" y="204" width="60" height="18" rx="3" fill="#6a55e4" opacity="0.2"/>
-  <rect x="124" y="230" width="60" height="20" rx="3" fill="#bd35c2" opacity="0.2"/>
+  <!-- Left Bottom: Graphical App window with mini 3-pane schematic -->
+  <rect x="20" y="156" width="184" height="114" rx="8" fill="none" stroke="#082445" stroke-width="2"/>
+  <rect x="20" y="156" width="184" height="24" rx="6" fill="#082445"/>
+  <circle cx="36" cy="168" r="3.5" fill="#1e71d6"/>
+  <circle cx="47" cy="168" r="3.5" fill="#6a55e4"/>
+  <circle cx="58" cy="168" r="3.5" fill="#bd35c2"/>
+  <text x="120" y="172" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">Antigravity App</text>
+  <!-- Pane 1: mini graph -->
+  <rect x="30" y="188" width="48" height="72" rx="4" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
+  <circle cx="44" cy="204" r="4" fill="#082445"/>
+  <circle cx="64" cy="222" r="4" fill="#1e71d6"/>
+  <circle cx="46" cy="242" r="4" fill="none" stroke="#495f7a" stroke-width="1.2" stroke-dasharray="2 2"/>
+  <line x1="47" y1="207" x2="61" y2="219" stroke="#1e71d6" stroke-width="1.5"/>
+  <line x1="45" y1="208" x2="46" y2="238" stroke="#495f7a" stroke-width="1" stroke-dasharray="2 2"/>
+  <!-- Pane 2: mini prompt canvas -->
+  <rect x="84" y="188" width="52" height="72" rx="4" fill="none" stroke="#6a55e4" stroke-width="1.5"/>
+  <rect x="90" y="196" width="40" height="14" rx="2" fill="#082445"/>
+  <rect x="90" y="216" width="40" height="10" rx="2" fill="#6a55e4" opacity="0.3"/>
+  <rect x="90" y="232" width="28" height="10" rx="2" fill="#1e71d6" opacity="0.3"/>
+  <!-- Pane 3: mini diff hunks -->
+  <rect x="142" y="188" width="52" height="72" rx="4" fill="none" stroke="#bd35c2" stroke-width="1.5"/>
+  <rect x="148" y="196" width="40" height="10" rx="2" fill="#bd35c2" opacity="0.25"/>
+  <rect x="148" y="212" width="40" height="10" rx="2" fill="#1e71d6" opacity="0.25"/>
+  <rect x="148" y="228" width="40" height="10" rx="2" fill="#1e71d6" opacity="0.25"/>
 
-  <!-- Connectors to Local Shared Workspace and Engine -->
-  <path d="M 204 77 L 278 118" fill="none" stroke="#1e71d6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
-  <path d="M 204 217 L 278 176" fill="none" stroke="#1e71d6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <!-- Converging arrows into Shared Engine -->
+  <path d="M 204 74 L 266 112" fill="none" stroke="#1e71d6" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+  <path d="M 204 213 L 266 176" fill="none" stroke="#1e71d6" stroke-width="2.5" marker-end="url(#arr-blue)"/>
 
-  <!-- Center: Local Antigravity Engine and Shared Workspace State -->
-  <rect x="286" y="44" width="228" height="212" rx="10" fill="none" stroke="#082445" stroke-width="2.5"/>
-  <rect x="304" y="62" width="192" height="44" rx="6" fill="url(#ag-flow)"/>
-  <text x="400" y="89" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Antigravity Core Engine</text>
+  <!-- Center: Shared Local Workspace and Engine -->
+  <rect x="274" y="20" width="248" height="250" rx="10" fill="none" stroke="#082445" stroke-width="2.5"/>
+  <rect x="290" y="34" width="216" height="36" rx="6" fill="url(#ag-band)"/>
+  <text x="398" y="57" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Local Antigravity Runtime</text>
 
-  <!-- Config and context artifacts inside workspace -->
-  <rect x="304" y="120" width="192" height="34" rx="4" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
-  <text x="400" y="142" text-anchor="middle" fill="#1c1d1f" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">antigravity.yaml</text>
+  <!-- Config + Session State row -->
+  <rect x="290" y="82" width="110" height="42" rx="5" fill="#082445"/>
+  <text x="345" y="101" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">antigravity.yaml</text>
+  <text x="345" y="116" text-anchor="middle" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="9">models + globs</text>
 
-  <rect x="304" y="164" width="90" height="36" rx="4" fill="none" stroke="#495f7a" stroke-width="1.5"/>
-  <text x="349" y="186" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="11">.antigravity/</text>
+  <rect x="408" y="82" width="98" height="42" rx="5" fill="none" stroke="#6a55e4" stroke-width="1.8"/>
+  <text x="457" y="101" text-anchor="middle" fill="#1c1d1f" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">.antigravity/</text>
+  <text x="457" y="116" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="9">sessions + cache</text>
 
-  <rect x="406" y="164" width="90" height="36" rx="4" fill="none" stroke="#495f7a" stroke-width="1.5"/>
-  <text x="451" y="186" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="11">src/ + tests/</text>
+  <!-- AST Indexer & Working Tree schematic -->
+  <rect x="290" y="136" width="216" height="118" rx="6" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
+  <text x="302" y="154" fill="#082445" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">AST Context Index + Working Tree</text>
 
-  <text x="400" y="232" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="12">Context graph + AST indexer</text>
+  <!-- Visual AST nodes inside center -->
+  <rect x="302" y="166" width="76" height="24" rx="4" fill="#082445"/>
+  <text x="340" y="182" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10">src/api.ts</text>
 
-  <!-- Forward Prompt Stream and Reverse Diff Stream to Gemini -->
-  <path d="M 514 116 L 598 116" fill="none" stroke="#1e71d6" stroke-width="3" marker-end="url(#arrow-blue)"/>
-  <text x="556" y="106" text-anchor="middle" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">context</text>
+  <line x1="378" y1="178" x2="404" y2="178" stroke="#1e71d6" stroke-width="1.8"/>
+  <rect x="404" y="166" width="88" height="24" rx="4" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
+  <text x="448" y="182" text-anchor="middle" fill="#1c1d1f" font-family="Inter, system-ui, sans-serif" font-size="10">src/types.ts</text>
 
-  <path d="M 598 184 L 514 184" fill="none" stroke="#bd35c2" stroke-width="3" marker-end="url(#arrow-magenta)"/>
-  <text x="556" y="204" text-anchor="middle" fill="#bd35c2" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">patches</text>
+  <line x1="340" y1="190" x2="340" y2="210" stroke="#1e71d6" stroke-width="1.8"/>
+  <rect x="302" y="210" width="76" height="24" rx="4" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
+  <text x="340" y="226" text-anchor="middle" fill="#1c1d1f" font-family="Inter, system-ui, sans-serif" font-size="10">tests/api.ts</text>
 
-  <!-- Right: Gemini Model Endpoints -->
-  <rect x="606" y="54" width="170" height="192" rx="10" fill="#082445"/>
-  <text x="691" y="86" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Gemini API</text>
+  <!-- Pruned node -->
+  <rect x="404" y="210" width="88" height="24" rx="4" fill="none" stroke="#495f7a" stroke-width="1.2" stroke-dasharray="3 2"/>
+  <text x="448" y="226" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="9">dist/ (pruned)</text>
 
-  <rect x="624" y="104" width="134" height="52" rx="6" fill="#1e71d6"/>
-  <text x="691" y="126" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">gemini-2.5-pro</text>
-  <text x="691" y="144" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" opacity="0.9">Deep reasoning</text>
+  <!-- Bidirectional Loop to Gemini -->
+  <!-- Top: Pruned Context Stream -->
+  <path d="M 522 96 L 606 96" fill="none" stroke="#1e71d6" stroke-width="3" marker-end="url(#arr-blue)"/>
+  <rect x="534" y="70" width="60" height="18" rx="3" fill="#1e71d6"/>
+  <text x="564" y="83" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">context</text>
 
-  <rect x="624" y="170" width="134" height="52" rx="6" fill="#6a55e4"/>
-  <text x="691" y="192" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">gemini-2.5-flash</text>
-  <text x="691" y="210" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" opacity="0.9">Fast iteration</text>
+  <!-- Bottom: Structured Diff Patches -->
+  <path d="M 606 194 L 522 194" fill="none" stroke="#bd35c2" stroke-width="3" marker-end="url(#arr-magenta)"/>
+  <rect x="534" y="204" width="60" height="18" rx="3" fill="#bd35c2"/>
+  <text x="564" y="217" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">+/- diff</text>
+
+  <!-- Right: Gemini Model Routing -->
+  <rect x="614" y="36" width="166" height="218" rx="10" fill="#082445"/>
+  <text x="697" y="64" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Gemini Models</text>
+
+  <!-- Flash model card -->
+  <rect x="630" y="82" width="134" height="68" rx="6" fill="#1e71d6"/>
+  <text x="697" y="104" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">gemini-2.5-flash</text>
+  <rect x="644" y="114" width="106" height="8" rx="4" fill="#ffffff" opacity="0.3"/>
+  <rect x="644" y="114" width="36" height="8" rx="4" fill="#ffffff"/>
+  <text x="697" y="138" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10">Low-latency edits</text>
+
+  <!-- Pro model card -->
+  <rect x="630" y="166" width="134" height="68" rx="6" fill="#6a55e4"/>
+  <text x="697" y="188" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">gemini-2.5-pro</text>
+  <rect x="644" y="198" width="106" height="8" rx="4" fill="#ffffff" opacity="0.3"/>
+  <rect x="644" y="198" width="84" height="8" rx="4" fill="#ffffff"/>
+  <text x="697" y="222" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10">Deep multi-file plan</text>
 </svg>

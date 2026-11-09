@@ -17,79 +17,94 @@
   </defs>
 
   <!-- 1. Left: Local Repo Tree and AST Import Graph -->
-  <rect x="20" y="24" width="184" height="220" rx="8" fill="none" stroke="#082445" stroke-width="2"/>
-  <text x="34" y="48" fill="#082445" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">AST Import Graph</text>
+  <rect x="16" y="24" width="180" height="224" rx="8" fill="none" stroke="#082445" stroke-width="2"/>
+  <text x="30" y="46" fill="#082445" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">1. AST Import Pruner</text>
 
   <!-- Selected target node -->
-  <rect x="34" y="64" width="156" height="32" rx="4" fill="#082445"/>
-  <text x="44" y="84" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">src/orders/handler.ts</text>
+  <rect x="30" y="60" width="152" height="30" rx="4" fill="#082445"/>
+  <text x="40" y="79" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">src/orders/handler.ts</text>
 
   <!-- Imported dependency nodes (included) -->
-  <line x1="52" y1="96" x2="52" y2="118" stroke="#1e71d6" stroke-width="2"/>
-  <line x1="52" y1="118" x2="66" y2="118" stroke="#1e71d6" stroke-width="2"/>
-  <rect x="66" y="104" width="124" height="28" rx="4" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
-  <text x="76" y="122" fill="#1c1d1f" font-family="Inter, system-ui, sans-serif" font-size="11">src/types/order.ts</text>
+  <line x1="46" y1="90" x2="46" y2="112" stroke="#1e71d6" stroke-width="2"/>
+  <line x1="46" y1="112" x2="60" y2="112" stroke="#1e71d6" stroke-width="2"/>
+  <rect x="60" y="98" width="122" height="26" rx="4" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
+  <text x="68" y="115" fill="#1c1d1f" font-family="Inter, system-ui, sans-serif" font-size="10">src/types/order.ts</text>
 
-  <line x1="52" y1="118" x2="52" y2="156" stroke="#1e71d6" stroke-width="2"/>
-  <line x1="52" y1="156" x2="66" y2="156" stroke="#1e71d6" stroke-width="2"/>
-  <rect x="66" y="142" width="124" height="28" rx="4" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
-  <text x="76" y="160" fill="#1c1d1f" font-family="Inter, system-ui, sans-serif" font-size="11">src/db/client.ts</text>
+  <line x1="46" y1="112" x2="46" y2="148" stroke="#1e71d6" stroke-width="2"/>
+  <line x1="46" y1="148" x2="60" y2="148" stroke="#1e71d6" stroke-width="2"/>
+  <rect x="60" y="134" width="122" height="26" rx="4" fill="none" stroke="#1e71d6" stroke-width="1.5"/>
+  <text x="68" y="151" fill="#1c1d1f" font-family="Inter, system-ui, sans-serif" font-size="10">src/db/client.ts</text>
 
   <!-- Pruned / excluded nodes -->
-  <rect x="34" y="188" width="156" height="40" rx="4" fill="none" stroke="#495f7a" stroke-width="1" stroke-dasharray="4 3"/>
-  <text x="44" y="206" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10">node_modules/ , dist/</text>
-  <text x="44" y="220" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10">pruned by exclude globs</text>
+  <line x1="46" y1="148" x2="46" y2="196" stroke="#495f7a" stroke-width="1.5" stroke-dasharray="3 2"/>
+  <line x1="46" y1="196" x2="60" y2="196" stroke="#495f7a" stroke-width="1.5" stroke-dasharray="3 2"/>
+  <rect x="60" y="176" width="122" height="44" rx="4" fill="none" stroke="#495f7a" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="68" y="194" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10">node_modules/, dist/</text>
+  <text x="68" y="210" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="9">pruned by exclude</text>
 
   <!-- Arrow 1 -->
-  <path d="M 204 128 L 254 128" fill="none" stroke="#1e71d6" stroke-width="2.5" marker-end="url(#arr-b)"/>
+  <path d="M 196 136 L 232 136" fill="none" stroke="#1e71d6" stroke-width="2.5" marker-end="url(#arr-b)"/>
 
-  <!-- 2. Center-Left: Pruned Token Payload -->
-  <rect x="262" y="42" width="160" height="184" rx="8" fill="#082445"/>
-  <text x="342" y="66" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Context Payload</text>
+  <!-- 2. Center-Left: Pruned Token Payload & Gemini Call -->
+  <rect x="240" y="34" width="164" height="204" rx="8" fill="#082445"/>
+  <text x="322" y="56" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">2. Context Payload</text>
 
-  <!-- Stacked token slices showing proportional budget -->
-  <rect x="278" y="80" width="128" height="26" rx="4" fill="#1e71d6"/>
-  <text x="342" y="97" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11">Prompt + Schema</text>
+  <!-- Proportional 32k Token Window Gauge -->
+  <text x="256" y="76" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">4.2k / 32.0k tokens</text>
+  <rect x="256" y="84" width="132" height="14" rx="7" fill="none" stroke="#495f7a" stroke-width="1.5"/>
+  <rect x="258" y="86" width="32" height="10" rx="5" fill="url(#payload-band)"/>
 
-  <rect x="278" y="114" width="128" height="44" rx="4" fill="url(#payload-band)"/>
-  <text x="342" y="134" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">AST Signatures</text>
-  <text x="342" y="149" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" opacity="0.9">4.2k / 32k tokens</text>
+  <!-- Payload slices -->
+  <rect x="256" y="110" width="132" height="26" rx="4" fill="#1e71d6"/>
+  <text x="322" y="127" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10">Prompt + AST Types</text>
 
-  <rect x="278" y="166" width="128" height="44" rx="4" fill="#6a55e4"/>
-  <text x="342" y="186" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">gemini-2.5-flash</text>
-  <text x="342" y="201" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" opacity="0.9">Streaming response</text>
+  <rect x="256" y="144" width="132" height="36" rx="4" fill="#6a55e4"/>
+  <text x="322" y="160" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">gemini-2.5-flash</text>
+  <text x="322" y="173" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="9" opacity="0.9">Streaming diff</text>
+
+  <text x="322" y="218" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10">87% budget saved</text>
 
   <!-- Arrow 2 -->
-  <path d="M 422 128 L 472 128" fill="none" stroke="#6a55e4" stroke-width="2.5" marker-end="url(#arr-p)"/>
+  <path d="M 404 136 L 440 136" fill="none" stroke="#6a55e4" stroke-width="2.5" marker-end="url(#arr-p)"/>
 
   <!-- 3. Center-Right: Unified Diff Hunks -->
-  <rect x="480" y="34" width="166" height="200" rx="8" fill="none" stroke="#6a55e4" stroke-width="2"/>
-  <text x="494" y="56" fill="#082445" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Unified Diff Patch</text>
+  <rect x="448" y="34" width="160" height="204" rx="8" fill="none" stroke="#6a55e4" stroke-width="2"/>
+  <text x="462" y="56" fill="#082445" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">3. Unified Diff Patch</text>
 
   <!-- Diff lines representation -->
-  <rect x="494" y="70" width="138" height="20" rx="3" fill="#495f7a" opacity="0.15"/>
-  <text x="502" y="84" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10">@@ -14,4 +14,8 @@</text>
+  <rect x="462" y="70" width="132" height="20" rx="3" fill="#495f7a" opacity="0.15"/>
+  <text x="470" y="84" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10">@@ -14,4 +14,8 @@</text>
 
-  <rect x="494" y="96" width="138" height="22" rx="3" fill="#bd35c2" opacity="0.18"/>
-  <text x="502" y="111" fill="#bd35c2" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">- return rawOrder;</text>
+  <rect x="462" y="96" width="132" height="22" rx="3" fill="#bd35c2" opacity="0.18"/>
+  <text x="470" y="111" fill="#bd35c2" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">- return rawOrder;</text>
 
-  <rect x="494" y="124" width="138" height="22" rx="3" fill="#1e71d6" opacity="0.18"/>
-  <text x="502" y="139" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">+ const valid = parse()</text>
+  <rect x="462" y="124" width="132" height="22" rx="3" fill="#1e71d6" opacity="0.18"/>
+  <text x="470" y="139" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">+ const v = parse()</text>
 
-  <rect x="494" y="152" width="138" height="22" rx="3" fill="#1e71d6" opacity="0.18"/>
-  <text x="502" y="167" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">+ return valid.data;</text>
+  <rect x="462" y="152" width="132" height="22" rx="3" fill="#1e71d6" opacity="0.18"/>
+  <text x="470" y="167" fill="#1e71d6" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">+ return v.data;</text>
 
-  <text x="563" y="212" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="11">--dry-run / --apply</text>
+  <text x="528" y="216" text-anchor="middle" fill="#495f7a" font-family="Inter, system-ui, sans-serif" font-size="10">--dry-run preview</text>
 
   <!-- Arrow 3 -->
-  <path d="M 646 128 L 688 128" fill="none" stroke="#bd35c2" stroke-width="2.5" marker-end="url(#arr-m)"/>
+  <path d="M 608 136 L 642 136" fill="none" stroke="#bd35c2" stroke-width="2.5" marker-end="url(#arr-m)"/>
 
-  <!-- 4. Right: Verification Gate & Working Tree -->
-  <rect x="696" y="54" width="88" height="160" rx="8" fill="#082445"/>
-  <text x="740" y="82" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">--verify</text>
-  <rect x="710" y="96" width="60" height="26" rx="4" fill="#1e71d6"/>
-  <text x="740" y="113" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10">npm test</text>
-  <rect x="710" y="134" width="60" height="58" rx="4" fill="#bd35c2"/>
-  <text x="740" y="158" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">Write or</text>
-  <text x="740" y="174" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">Rollback</text>
+  <!-- 4. Right: Verification Gate Fork (Write vs Rollback) -->
+  <rect x="650" y="34" width="134" height="204" rx="8" fill="#082445"/>
+  <text x="717" y="56" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">4. --verify Gate</text>
+
+  <!-- Test runner node -->
+  <rect x="666" y="70" width="102" height="28" rx="4" fill="#6a55e4"/>
+  <text x="717" y="88" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">npm test</text>
+
+  <!-- Pass path -->
+  <line x1="692" y1="98" x2="692" y2="122" stroke="#1e71d6" stroke-width="2"/>
+  <rect x="664" y="122" width="106" height="44" rx="4" fill="#1e71d6"/>
+  <text x="717" y="140" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">exit 0: Write</text>
+  <text x="717" y="156" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="9" opacity="0.9">Commit to disk</text>
+
+  <!-- Fail rollback path -->
+  <rect x="664" y="178" width="106" height="44" rx="4" fill="#bd35c2"/>
+  <text x="717" y="196" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">exit != 0: Revert</text>
+  <text x="717" y="212" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="9" opacity="0.9">Auto-rollback</text>
 </svg>

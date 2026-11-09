@@ -213,6 +213,16 @@ ag auth status
 
 ---
 
+# Do Now: Spot the Context Bloater
+
+Before we look at `antigravity.yaml`, inspect a typical repository directory listing in your head or on your machine:
+
+- `.git/`, `node_modules/`, `dist/`, `.env.local`, `src/`, `tests/`
+- Write down which paths **must never** be sent to Gemini for security or token reasons
+- Write down which paths Gemini **needs** to generate accurate code and unit tests
+
+---
+
 # Configuring Project Defaults in antigravity.yaml
 
 - Running `ag init` creates an `antigravity.yaml` manifest at the root of your repository
@@ -250,6 +260,11 @@ safety:
 - **Context overflow**: Missing `exclude` rules pull `node_modules/` or build artifacts into prompts
 - **Stale env var**: A forgotten `export ANTIGRAVITY_MODEL` overrides changes made in `antigravity.yaml`
 
+<!-- below-columns -->
+
+> [!TIP]
+> Run `ag config --effective` at any time to print the merged configuration and see which layer (flag, env var, workspace, or global) supplied each active setting.
+
 ---
 
 <!-- layout: navigation -->
@@ -275,27 +290,28 @@ safety:
 
 ### Step 3: Initialize and Validate Workspace
 - Run `ag init` in a sample repository to generate `antigravity.yaml` and `.gitignore` entries.
-- Execute a live connectivity check and launch the Antigravity App on the initialized workspace.
+- Inspect effective configuration layers, execute a live connectivity check, and launch the Antigravity App.
 
 ---
 
 # Demo Step 1 and 2: Diagnostics and Authentication
 
-- First, we verify the installation health and authenticate against the Gemini API
+- First, we verify the installation health and inspect the diagnostic output before authenticating
 
 ```bash
 # 1. Check installed version and environment health
 ag --version
 ag doctor
 
+# Expected output from ag doctor:
+# [OK] Node.js v20.14.0 (>= 20.0.0)
+# [OK] Git v2.43.0 repository detected (.git)
+# [OK] OS Keychain unlocked and writable
+
 # 2. Authenticate and verify active credential source
 ag auth login --provider ai-studio
 ag auth status
 ```
-
-- **What to watch for during the demo**:
-  - `ag doctor` confirms Git repository detection and local keychain write permissions
-  - `ag auth status` displays the masked key fingerprint and active endpoint without exposing secrets
 
 ---
 
@@ -307,8 +323,8 @@ ag auth status
 # 3. Initialize workspace config
 ag init --default-model gemini-2.5-flash
 
-# 4. Inspect generated config
-cat antigravity.yaml
+# 4. Inspect effective config sources
+ag config --effective
 
 # 5. Send a live validation prompt
 ag ping --model gemini-2.5-flash
@@ -318,7 +334,8 @@ ag app open .
 ```
 
 ### Expected Validation Results
-- `ag init` writes `antigravity.yaml` and appends `.antigravity/cache` to `.gitignore`
+- `ag init` writes `antigravity.yaml` and appends `.antigravity/cache` and `.antigravity/credentials.json` to `.gitignore`
+- `ag config --effective` shows `models.default: gemini-2.5-flash (source: ./antigravity.yaml)`
 - `ag ping` returns round-trip latency and token usage from `gemini-2.5-flash`
 - `ag app open .` launches the graphical interface preloaded with the same workspace settings
 

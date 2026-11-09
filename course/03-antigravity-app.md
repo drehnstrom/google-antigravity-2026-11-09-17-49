@@ -145,6 +145,18 @@ Google Antigravity
 
 ---
 
+<!-- layout: 2-column -->
+# Discuss: When Does a Green Sandbox Badge Lie?
+
+### Prompt
+You run a multi-file refactor in the Antigravity App across `src/orders/service.ts` and `tests/orders/service.test.ts`. The **Sandbox Verify** badge immediately turns green (`4 passed`).
+
+### Discuss
+- How could the model make the sandbox test suite pass while still breaking business logic?
+- Which file in the Multi-File Diff Inspector should you inspect first before clicking **Apply Selected Hunks**?
+
+---
+
 <!-- layout: 3-column -->
 # Managing Workspaces and Session History
 
@@ -278,8 +290,8 @@ ag app open --session order-idempotency
 3. Open the Command Palette (`Cmd/Ctrl + K`), choose **Export Session as Template**, and save `.antigravity/templates/idempotent-service.yaml`
 
 ```bash
-# 4. Back in the terminal, verify the exported template
-ls -l .antigravity/templates/idempotent-service.yaml
+# 4. Back in the terminal, inspect the exported template
+cat .antigravity/templates/idempotent-service.yaml
 
 # 5. Reuse the new template from the CLI
 ag generate src/refunds/service.ts \
@@ -291,7 +303,7 @@ ag generate src/refunds/service.ts \
 ### What to Watch For
 - Both branches run sandbox tests in parallel without modifying your working files until you click **Apply Selected Hunks**
 - The Diff Inspector updates `src/orders/service.ts` and `tests/orders/service.test.ts` atomically once approved
-- Exporting the session immediately writes a clean, parameterized YAML template ready for the CLI
+- `cat .antigravity/templates/idempotent-service.yaml` shows our muted exclusion rule and `{{domain}}` variable baked into the YAML
 
 ---
 

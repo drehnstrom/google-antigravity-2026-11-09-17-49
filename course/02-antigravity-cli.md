@@ -100,7 +100,7 @@ ag generate src/routes/orders.ts \
 
 ### Piping Logs and Diffs into `ag`
 - Pipe compiler errors, failing test output, or Git diffs directly via `stdin`
-- Combine standard input with `--file` so Gemini sees both the failure trace and the source file
+- Pass the target source file as the command argument so Gemini sees both the failure trace and the file
 
 ```bash
 # Pipe failing test output into ag edit
@@ -135,6 +135,21 @@ git diff origin/main | ag review \
 - **Generating Code and Eliminating Boilerplate**
 - Automating Routine Development Tasks
 - Demo: Accelerating Development Workflows with the Antigravity CLI
+
+---
+
+# Do Now: Diagnose the Unanchored Prompt
+
+Look at this command before we run it:
+
+```bash
+ag generate src/controllers/invoice.controller.ts \
+  --prompt "Create CRUD handlers for invoices"
+```
+
+- The file `src/controllers/invoice.controller.ts` does not exist yet, so it has no imports for the AST parser to follow
+- Write down two things Gemini will have to guess (and likely get wrong) without `--context`
+- Write down which flag and files you would add to fix it
 
 ---
 
@@ -243,7 +258,7 @@ ag generate src/services/shipping.service.ts --template service-module --var dom
 - Route complex cross-file changes to `gemini-2.5-pro` with `--verify` enabled to guarantee passing tests.
 
 ### Pre-Commit Review and Docs
-- Run `ag review --staged` before committing to flag leaked secrets, unhandled promises, or missing docstrings.
+- Run `ag review` on staged Git diffs before committing to flag leaked secrets, unhandled promises, or missing docstrings.
 - Generate changelog entries, OpenAPI specs, and pull request descriptions directly from Git history.
 
 ---
@@ -251,7 +266,7 @@ ag generate src/services/shipping.service.ts --template service-module --var dom
 # Automating Unit Test Generation and Verification
 
 - Use `ag test` to analyze control flow in a source file, scaffold a matching test file, and execute your test runner in one loop
-- Passing `--verify` instructs Antigravity to run the generated test suite and self-correct any syntax or assertion errors
+- Passing `--verify` instructs Antigravity to run the generated test suite and roll back if the test runner exits non-zero
 
 ```bash
 # Generate unit tests for pricing logic and verify they pass in Vitest
@@ -270,7 +285,7 @@ ag test src/billing/discount-calculator.ts \
 # Declarative Workflows in antigravity.yaml
 
 - Define repeatable, multi-step workflows under the `workflows:` key in `antigravity.yaml` and execute them with `ag run <workflow-name>`
-- Workflows chain code generation, verification commands, and model overrides into a single command
+- Workflows can chain code generation, verification commands, or stdin pipes into a single command
 
 ```yaml
 # Excerpt from antigravity.yaml
@@ -284,6 +299,11 @@ workflows:
         run: ag test src/routes/{{name}}.ts --output tests/routes/{{name}}.test.ts
       - name: verify-types-and-tests
         shell: npm run typecheck && npx vitest run tests/routes/{{name}}.test.ts
+  commit-summary:
+    description: Generate a conventional commit message from piped git diff
+    steps:
+      - name: summarize-diff
+        run: ag explain --model gemini-2.5-flash --prompt "Write a conventional commit message for this diff"
 ```
 
 ---
@@ -317,7 +337,7 @@ ag run pr-audit \
 <!-- below-columns -->
 
 > [!CAUTION]
-> Never use `--auto-apply` without `--verify` inside an automated CI pipeline. Unverified automated commits can introduce build failures directly into your branch.
+> Always require `--verify` before committing AI-generated changes in an automated pipeline. Unverified automated commits can introduce build failures directly into your branch.
 
 ---
 
@@ -344,7 +364,7 @@ ag run pr-audit \
 
 ### Step 3: Pipe a Diff into Automated Review
 - Stage the generated files with Git and pipe `git diff --staged` into `ag review`.
-- Execute a multi-step `ag run` workflow from `antigravity.yaml` to produce a structured commit summary.
+- Execute the `ag run commit-summary` workflow from `antigravity.yaml` to produce a conventional commit message.
 
 ---
 
@@ -394,7 +414,7 @@ git diff --staged | ag run commit-summary
 ### What to Watch For
 - `ag test --verify` writes the test suite, invokes `vitest`, and confirms all assertions pass before returning
 - `ag review` reads the piped Git diff and checks for missing authentication middleware or unhandled errors
-- `ag run commit-summary` outputs a clean, conventional commit message ready for `git commit`
+- `ag run commit-summary` executes the workflow defined in `antigravity.yaml` and prints `feat(subscriptions): add create, pause, and cancel routes with unit tests`
 
 ---
 
